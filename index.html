@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Bibliophile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Playful, bold font for the wish -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      background: linear-gradient(135deg, #fde7f2 0%, #ffe4ea 100%);
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    .section {
+      min-height: 10vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 36px 0 18px 0;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+    .section-hero {
+      padding-top: 55px;
+      padding-bottom: 30px;
+    }
+    .birthday-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.6rem;
+      /* Pink gradient text */
+      background: linear-gradient(90deg, #fc336f, #f87193 65%, #f334b3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #e75480;
+      letter-spacing: .01em;
+      margin-bottom: 18px;
+      text-align: center;
+      text-shadow: 0 3px 10px hsl(330, 95%, 83%), 0 1px 6px #e18ea8;
+      line-height: 1.19;
+      border-radius: 14px;
+      padding: 8px 12px;
+      box-shadow: 0 4px 16px #ff80ba33;
+      transition: font-size .3s;
+    }
+    .subtitle {
+      font-size: 1.12rem;
+      color: #e75480;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .baton-pair {
+      display: flex;
+      gap: 24px;
+      margin: 45px 0 20px 0;
+      justify-content: center;
+    }
+    .baton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: transform .14s;
+      position: relative;
+      z-index: 2;
+      font-family: inherit;
+    }
+    .baton-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #ff80ba, #e75480 80%);
+      border-radius: 21px;
+      box-shadow: 0 2px 16px #e7548084;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .21s;
+    }
+    .baton-icon svg {
+      width: 25px; height: 25px; fill: #fff;
+      filter: drop-shadow(0 2px 8px #fff6f8bb);
+    }
+    .baton-label {
+      margin-top: 2px;
+      color: #e75480;
+      font-size: .96rem;
+      font-family: 'Pacifico', cursive;
+      pointer-events: none;
+    }
+    /* Memories SWAP effect */
+    .memories {
+      width: 98vw;
+      max-width: 390px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      position: relative;
+    }
+    .carousel-photo {
+      width: 83vw;
+      max-width: 310px;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 2px 18px #e7548057;
+      margin-bottom: 12px;
+      opacity: 0;
+      position: absolute;
+      left: 0; right: 0;
+      top: 0;
+      transition: opacity .55s cubic-bezier(.36,2.15,.67,.49), transform .65s cubic-bezier(.42,.65,.62,1.72);
+      z-index: 1;
+      transform: scale(.95) translateX(120px);
+      pointer-events: none;
+    }
+    .carousel-photo.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1.03) translateX(0);
+      box-shadow: 0 2px 28px #e7548099;
+      z-index: 2;
+    }
+    .carousel-photo.swap-left {
+      transform: scale(.95) translateX(-120px);
+      opacity: 0;
+      transition: opacity .35s, transform .42s;
+      z-index: 1;
+    }
+    .carousel-photo.swap-right {
+      transform: scale(.95) translateX(120px);
+      opacity: 0;
+      transition: opacity .35s, transform .42s;
+      z-index: 1;
+    }
+    .memory-caption {
+      width: 98vw;
+      max-width: 335px;
+      text-align: center;
+      font-size: 1.04rem;
+      background: #ffe4ea88;
+      color: #e75480;
+      margin-bottom: 22px;
+      margin-top: 21px;
+      border-radius: 13px;
+      font-family: 'Quicksand', sans-serif;
+      position: relative;
+      backdrop-filter: blur(2px);
+      padding: 12px 5px 10px 5px;
+      box-shadow: 0 1px 12px #ffd3df36;
+    }
+    .footer {
+      text-align: center;
+      color: #fda4ba;
+      font-size: 1rem;
+      opacity: 0.72;
+      margin: 54px 6px 18px 6px;
+    }
+    
+
+    @media (max-width: 700px) {
+      .birthday-text {font-size: 1.63rem;}
+      .carousel-photo {max-width: 98vw; height: 36vw; min-height: 140px;}
+      .memories {max-width: 99vw;}
+      .memory-caption {font-size: .92rem;}
+    }
+    @media (max-width: 500px) {
+      .birthday-text {font-size: 1.08rem;}
+      .memories {min-height: 120px;}
+      .carousel-photo {max-width: 99vw; height: 29vw; min-height: 84px;}
+      .memory-caption {font-size:.87rem;}
+    }
+    @media (max-width: 340px) {
+      .footer {font-size:.72rem;}
+      .memory-caption {font-size:.73rem;}
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Section: Hero -->
+  <div class="section section-hero" id="hero">
+    <div class="birthday-text">HAPPY BIRTHDAY MY BIBLIOPHILE</div>
+    <div class="subtitle">Ami chai tumi shob shomoi happy thako (amar shathe) </div>
+    <div class="baton-pair">
+      <button class="baton" id="batonPrev" aria-label="Previous Memory" tabindex="0">
+        <span class="baton-icon"><!-- left arrow magic wand SVG -->
+          <svg viewBox="0 0 32 32"><path d="M27 6L6 27"/><circle cx="6" cy="27" r="2"/><polygon points="9,16 16,22 16,10" fill="#fff" opacity="0.4"/></svg>
+        </span>
+        <span class="baton-label">Prev</span>
+      </button>
+      <button class="baton" id="batonNext" aria-label="Next Memory" tabindex="0">
+        <span class="baton-icon"><!-- right arrow magic wand SVG -->
+          <svg viewBox="0 0 32 32"><path d="M5 28L28 5"/><circle cx="28" cy="5" r="2"/><polygon points="23,16 16,10 16,22" fill="#fff" opacity="0.4"/></svg>
+        </span>
+        <span class="baton-label">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Section: Memories carousel -->
+  <div class="section section-memories" id="memories">
+    <div class="memories">
+      <!-- Customize memories here: src/alt attributes and add/remove more images! -->
+      <img src="D:\VS Code\Bday\Gemini_Generated_Image_gjemx9gjemx9gjem.png" class="carousel-photo" alt="Book Cafe">
+      <img src="D:\VS Code\Bday\IMG_8692.JPG" class="carousel-photo" alt="Book Reading">
+      <img src="D:\VS Code\Bday\IMG_20241212_135252_587.jpg" class="carousel-photo" alt="Library Memory">
+      <img src="D:\VS Code\Bday\IMG_20250804_151333_164.jpg" class="carousel-photo" alt="Cute Hangout">
+    </div>
+    <div class="memory-caption" id="memoryCaption"></div>
+  </div>
+  <div class="footer">
+    Made with 💖 & His Creativity
+  </div>
+  <script>
+    // Carousel swap logic
+    const photos = document.querySelectorAll('.carousel-photo');
+    const captions = [
+      "Aita onek sweet chilo ",
+      "Din ta onek special chilo 💗",
+      "Amar sweet bou 💕",
+      "Amar bou dekhi Lozza pai 😊"
+    ];
+    const memoryCaption = document.getElementById('memoryCaption');
+    let photoIdx = 0, lastIdx = 0, swapTimeout = null;
+    let total = photos.length;
+
+    function swapPhoto(idx, direction) {
+      if(idx===lastIdx) return;
+      photos[lastIdx].classList.remove('active','swap-left','swap-right');
+      photos[lastIdx].classList.add(direction === 'left' ? 'swap-left' : 'swap-right');
+      photos[idx].classList.remove('swap-left','swap-right');
+      photos[idx].classList.add('active');
+      memoryCaption.textContent = captions[idx];
+      lastIdx = idx;
+    }
+    function gotoPhoto(idx, dir) {
+      idx = (idx + total) % total;
+      swapPhoto(idx, dir);
+      photoIdx = idx;
+    }
+
+    // Initial state
+    photos[0].classList.add('active');
+    memoryCaption.textContent = captions[0];
+
+    // Baton navigation
+    document.getElementById('batonPrev').addEventListener('click', function() {
+      gotoPhoto(photoIdx-1, 'left');
+      animateBaton(this);
+      playConfetti();
+      resetAutoSwap();
+    });
+    document.getElementById('batonNext').addEventListener('click', function() {
+      gotoPhoto(photoIdx+1, 'right');
+      animateBaton(this);
+      playConfetti();
+      resetAutoSwap();
+    });
+
+    // Auto-swap every 3.7s
+    function autoSwap() {
+      let nextIdx = (photoIdx+1)%total;
+      swapPhoto(nextIdx, 'right');
+      photoIdx = nextIdx;
+      resetAutoSwap();
+    }
+    function resetAutoSwap() {
+      if(swapTimeout) clearTimeout(swapTimeout);
+      swapTimeout = setTimeout(autoSwap, 3700);
+    }
+    resetAutoSwap();
+
+    function animateBaton(btn) {
+      btn.querySelector(".baton-icon").style.transform = "scale(1.18) rotate("+(Math.random()>.5?8:-8)+"deg)";
+      setTimeout(()=>{btn.querySelector(".baton-icon").style.transform="";},350);
+    }
+
+    // Emoji Confetti (little magic on baton press)
+    function playConfetti() {
+      for (let i=0; i<8; i++) {
+        let conf = document.createElement('div');
+        conf.textContent = ["📚","🎉","💖","✨","🌸"][Math.floor(Math.random()*5)];
+        conf.style.position = 'fixed';
+        conf.style.left = (Math.random()*92+4)+"vw";
+        conf.style.top = (Math.random()*32+3)+"vh";
+        conf.style.fontSize = (Math.random()*22+12)+"px";
+        conf.style.opacity = 0.85;
+        conf.style.zIndex = 9999;
+        conf.style.pointerEvents = 'none';
+        conf.style.transition = 'all 2s cubic-bezier(.02,.8,.52,1)';
+        document.body.appendChild(conf);
+        setTimeout(() => {
+          conf.style.top = (Math.random()*88+6)+"vh";
+          conf.style.opacity = 0;
+        }, 15);
+        setTimeout(() => {conf.remove();}, 2110 + Math.random()*490);
+      }
+    }
+  </script>
+</body>
+</html>
